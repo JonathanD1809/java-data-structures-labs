@@ -1,38 +1,49 @@
-# Smart Scheduler – Phase 1: Requirements & Design
+# Smart Scheduler – Phase 1 Design Document
 
-## 1. Project Overview
+# 1. Project Overview
 
-The Smart Scheduler is a software module designed to manage a stream of incoming tasks where each task has a different priority level. This system simulates real-world scenarios such as Operating System job scheduling, Emergency Room triage, or Banking loan processing. The main objective is to ensure that high-priority tasks are executed before lower-priority ones, even if the lower-priority tasks arrived earlier.
+The Smart Scheduler is a software module designed to manage tasks with varying priority levels. Its purpose is to always execute **high-priority tasks before lower-priority ones**. This is useful in real-world contexts such as:
 
-## 2. Problem Analysis
+* Operating system job scheduling
+* Emergency room triage
+* Bank loan processing
 
-In real-world systems, tasks do not arrive in order of importance. Some tasks are more urgent than others. Without a proper scheduling mechanism, urgent tasks may be delayed, resulting in inefficiency or risk (e.g., delayed emergency response). A priority queue implemented with a Heap is an ideal solution because it efficiently maintains the order of tasks based on priority.
+*Goal: Efficiently handle a continuous stream of incoming tasks and ensure urgent tasks are processed first.
 
-## 3. Data Structure Choice
+# 2. Problem Analysis
 
-We will use a **Max-Heap** (or Min-Heap depending on priority convention) implemented as an array-based binary heap. Each node in the heap represents a task with the following attributes:
+* Tasks arrive in no particular order of importance.
+* High-priority tasks must be executed before low-priority tasks to prevent delays or potential risks.
+* A Max-Heap (priority queue) is the ideal data structure: it maintains order efficiently and allows quick access to the highest-priority task.
 
-* Task ID
-* Task Description
-* Priority (higher number = higher priority)
+# 3. Data Structure Choice
 
-### Trade-offs:
+* Structure: Array-based Max-Heap
+* Node:Task (id, description, priority)
+* **Advantages:**
 
-* **Array-based heap:** Efficient memory usage, fast access for insert/delete operations (`O(log n)`).
-* **Linked heap:** Easier to implement dynamic size, but more memory overhead and slower access.
+  * O(1) access to the highest-priority task
+  * O(log n) insertion and deletion
+  * Array-based implementation is simple and fast
+Trade-off:
 
-### Big-O Expectations:
+  * Array provides fast access but has a fixed capacity.
+  * A linked structure could grow dynamically, but it is slower.
 
-| Operation                  | Complexity |
-| -------------------------- | ---------- |
-| Insert                     | O(log n)   |
-| Remove max (poll)          | O(log n)   |
-| Peek max                   | O(1)       |
-| Search (for specific task) | O(n)       |
+Expected Big-O Complexity:**
 
----
+| Operation | Complexity |
+| --------- | ---------- |
+| insert    | O(log n)   |
+| poll      | O(log n)   |
+| peek      | O(1)       |
+| search    | O(n)       |
 
-## 4. UML Diagram
+*Justification:
+The Max-Heap ensures tasks are always ordered by priority. Insertions and removals adjust the heap efficiently in O(log n), and retrieving the highest-priority task is O(1). Searching for a specific task is O(n) since it requires scanning the heap.
+
+
+# 4. UML Diagram
 
 +--------------------------+
 |          Task            |
@@ -70,11 +81,5 @@ We will use a **Max-Heap** (or Min-Heap depending on priority convention) implem
 | # heapifyDown(index: int): void|
 +--------------------------+
 
+Explanation: MaxHeap contains Task objects and provides public methods for priority management. Private heapify methods maintain internal heap order.
 
-## 5. Justification
-
-A Max-Heap ensures that the highest priority task is always at the root, providing `O(1)` access for peek operations and `O(log n)` for insert or removal. This guarantees that the scheduler executes urgent tasks first efficiently. Using an array-based heap simplifies implementation and testing while maintaining high performance for the main operations.
-
----
-
-This document completes **Phase 1**: Requirements & Design for the Smart Scheduler project.
