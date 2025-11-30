@@ -50,44 +50,43 @@ The Max-Heap ensures tasks are always ordered by priority. Insertions and remova
 
 ## 4. UML Diagram
 
-+--------------------------+
-|          Task            |
-+--------------------------+
-| - id: int                |
-| - description: String    |
-| - priority: int          |
-+--------------------------+
-| + getId(): int           |
-| + getDescription(): String|
-| + getPriority(): int     |
-| + toString(): String     |
-+--------------------------+
+This diagram illustrates the attributes and methods of the two main classes, along with the Composition relationship between them (MaxHeap contains Task).
 
-```
-      ^
-      |
-      |
-```
+classDiagram
+    direction LR
 
-+--------------------------+
-|         MaxHeap          |
-+--------------------------+
-| - heapArray: Task[]      |
-| - size: int              |
-| - capacity: int          |
-+--------------------------+
-| + insert(task: Task): void|
-| + poll(): Task           |
-| + peek(): Task           |
-| + findTaskById(id: int): Task |
-| + isEmpty(): boolean     |
-+--------------------------+
-| # heapifyUp(index: int): void  |
-| # heapifyDown(index: int): void|
-+--------------------------+
+    class Task {
+        - id: int
+        - description: String
+        - priority: int
+        + getId(): int
+        + getDescription(): String
+        + getPriority(): int
+        + toString(): String
+    }
 
-**Explanation:**
+    class MaxHeap {
+        - heapArray: Task[]
+        - size: int
+        - capacity: int
+        + insert(task: Task): void
+        + poll(): Task
+        + peek(): Task
+        + findTaskById(id: int): Task
+        + isEmpty(): boolean
+        # heapifyUp(index: int): void
+        # heapifyDown(index: int): void
+    }
 
-* **Task:** Represents a scheduled task, identified by ID and priority.
-* **MaxHeap:** Primary data structure managing Task objects according to Max-Heap rules.
-* **Relationship:** MaxHeap contains multiple Task objects (composition).
+    MaxHeap "1" *-- "*" Task : contains
+
+
+Explanation:
+
+Task: The base class, representing a scheduled task, is identified by ID and priority level.
+
+MaxHeap: The primary data structure class, utilizing an array (heapArray: Task[]) to manage Task objects according to Max-Heap rules.
+
+Relationship: The Composition relationship (denoted by *--) indicates that MaxHeap is a container that holds many Task objects.
+
+
