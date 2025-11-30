@@ -34,7 +34,6 @@ We will use a **Max-Heap** (or Min-Heap depending on priority convention) implem
 
 ## 4. UML Diagram
 
-```
 +------------------+
 |     Task         |
 +------------------+
@@ -45,6 +44,7 @@ We will use a **Max-Heap** (or Min-Heap depending on priority convention) implem
 | +getId(): int    |
 | +getDescription(): String |
 | +getPriority(): int |
+| +toString(): String |
 +------------------+
 
           ^
@@ -55,16 +55,18 @@ We will use a **Max-Heap** (or Min-Heap depending on priority convention) implem
 +------------------+
 | - heapArray: Task[] |
 | - size: int      |
+| - capacity: int  |
 +------------------+
 | +insert(task: Task): void |
 | +poll(): Task   |
 | +peek(): Task   |
-| +heapifyUp(): void |
-| +heapifyDown(): void |
+| +findTaskById(id: int): Task |
+| +isEmpty(): boolean |
 +------------------+
-```
+| #heapifyUp(index: int): void |
+| #heapifyDown(index: int): void |
++------------------+
 
----
 
 ## 5. Justification
 
