@@ -34,38 +34,41 @@ We will use a **Max-Heap** (or Min-Heap depending on priority convention) implem
 
 ## 4. UML Diagram
 
-+------------------+
-|     Task         |
-+------------------+
-| - id: int        |
-| - description: String |
-| - priority: int  |
-+------------------+
-| +getId(): int    |
-| +getDescription(): String |
-| +getPriority(): int |
-| +toString(): String |
-+------------------+
++--------------------------+
+|          Task            |
++--------------------------+
+| - id: int                |
+| - description: String    |
+| - priority: int          |
++--------------------------+
+| + getId(): int           |
+| + getDescription(): String|
+| + getPriority(): int     |
+| + toString(): String     |
++--------------------------+
 
-          ^
-          |
-          |
-+------------------+
-|   MaxHeap        |
-+------------------+
-| - heapArray: Task[] |
-| - size: int      |
-| - capacity: int  |
-+------------------+
-| +insert(task: Task): void |
-| +poll(): Task   |
-| +peek(): Task   |
-| +findTaskById(id: int): Task |
-| +isEmpty(): boolean |
-+------------------+
-| #heapifyUp(index: int): void |
-| #heapifyDown(index: int): void |
-+------------------+
+```
+      ^
+      |
+      |
+```
+
++--------------------------+
+|         MaxHeap          |
++--------------------------+
+| - heapArray: Task[]      |
+| - size: int              |
+| - capacity: int          |
++--------------------------+
+| + insert(task: Task): void|
+| + poll(): Task           |
+| + peek(): Task           |
+| + findTaskById(id: int): Task |
+| + isEmpty(): boolean     |
++--------------------------+
+| # heapifyUp(index: int): void  |
+| # heapifyDown(index: int): void|
++--------------------------+
 
 
 ## 5. Justification
